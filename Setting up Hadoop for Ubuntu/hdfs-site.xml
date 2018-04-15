@@ -9,11 +9,11 @@
 </property>
 <property>
 <name>dfs.namenode.name.dir</name>
-<value>/home/honey/BigdataExp/hadoop2.7.1/hadoop2_data/hdfs/namenode</value>
+<value>/home/santu/BigdataExp/hadoop2.7.1/hadoop2_data/hdfs/namenode</value>
 
 </property>
 <property>
 <name>dfs.datanode.data.dir</name>
-<value>/home/honey/BigdataExp/hadoop2.7.1/hadoop2_data/hdfs/datanode</value>
+<value>/home/santu/BigdataExp/hadoop2.7.1/hadoop2_data/hdfs/datanode</value>
 
 </property></configuration> 

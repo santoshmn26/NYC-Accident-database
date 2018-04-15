@@ -1,0 +1,11 @@
+#Update the cofiguration
+<configuration>
+<property>
+<name>fs.default.name</name>
+<value>hdfs://localhost:9000</value>
+</property>
+<property>
+<name>hadoop.tmp.dir</name>
+<value>/home/honey/BigdataExp/hadoop-2.7.1/tmp</value>
+</property>
+</configuration> 

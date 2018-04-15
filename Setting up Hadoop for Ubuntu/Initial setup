@@ -1,0 +1,43 @@
+1). Open the terminal to access the file system.
+2). Update the OS packages and their dependencies
+    $sudo apt-get update
+3).Install the Java and openssh server for Hadoop 2.7.1
+    $sudo apt-get install openjdk-7-jdk
+    $sudo apt-get install openssh-server
+4) Creating ssh key.
+    $ssh-keygen -t rsa -P ""
+    $cat $HOME/.ssh/id_rsa.pub >> $HOME/.ssh/authorized_keys
+5). Download the Hadoop 2.7.1 Binary from following url
+http://www.apache.org/dyn/closer.cgi/hadoop/common/hadoop-2.7.1/hadoop-2.7.1.tar.gz
+6). 5. Extract Hadoop 2.7.1 and Move it to BigDataExp folder in your Home Folder
+7). Update “.bashrc” file for user ‘ubuntu’.
+7.1) Change directory to home.
+    $ cd
+7.2) Edit the file
+    $ sudo gedit .bashrc
+*Add below lines in the .bashrc file.
+# Set JAVA_HOME
+export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-i386
+export PATH="$PATH:$JAVA_HOME/bin"
+# Set Hadoop-related environment variables
+export HADOOP_HOME=$HOME/BigdataExp/hadoop-2.7.1
+export HADOOP_CONF_DIR=$HOME/BigdataExp/hadoop-2.7.1/etc/hadoop
+export HADOOP_MAPRED_HOME=$HOME/BigdataExp/hadoop-2.7.1
+export HADOOP_COMMON_HOME=$HOME/BigdataExp/hadoop-2.7.1
+export HADOOP_HDFS_HOME=$HOME/BigdataExp/hadoop-2.7.1
+export YARN_HOME=$HOME/BigdataExp/hadoop-2.7.1
+# Add Hadoop bin/ directory to PATH
+    export PATH="$PATH:$HOME/BigdataExp/hadoop-2.7.1/bin"
+7.3) Source the .bashrc file to set the hadoop environment variables without having to invoke a
+new shell:
+    $ source .bashrc
+8. Configure JAVA_HOME
+Configure JAVA_HOME in ‘hadoop-env.sh’. This file specifies environment variables that affect the
+JDK used by Apache Hadoop 2.2.0 daemons started by the Hadoop start-up scripts
+* Go to BigdataExp/hadoop-2.7.1/etc/hadoop/ directory. Open hadoop-env.sh in gedit and update
+JAVA_HOME to:
+    export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-i386
+8. Create NameNode and DataNode directory
+Create DataNode and NameNode directories to store HDFS data.
+    $mkdir -p $HADOOP_HOME/hadoop2_data/hdfs/namenode
+    $mkdir -p $HADOOP_HOME/hadoop2_data/hdfs/datanode

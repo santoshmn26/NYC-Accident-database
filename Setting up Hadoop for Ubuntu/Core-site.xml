@@ -6,6 +6,6 @@
 </property>
 <property>
 <name>hadoop.tmp.dir</name>
-<value>/home/honey/BigdataExp/hadoop-2.7.1/tmp</value>
+<value>/home/Santu/BigdataExp/hadoop-2.7.1/tmp</value>
 </property>
 </configuration> 

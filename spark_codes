@@ -1,0 +1,244 @@
+
+commits.printSchema
+
+
+val commits = spark.read.
+              option("header", "true").
+              csv("user/data/data.csv")
+commits.printSchema
+
+
+val commits = spark.read.
+              option("header", "true").
+              option("delimiter", "|").
+              csv("user/data/data.csv")
+commits.printSchema
+commits.show(false)
+commits.count
+
+
+
+val commits = spark.read.
+              option("header", "true").
+              option("delimiter", "|").
+              csv("user/data/data.csv")
+commits.count 
+
+
+val db = commits.filter(commits("BOROUGH").contains("user/data/data.csv"))
+db.count
+db.show
+
+
+commits.groupBy("BOROUGH")
+commits.groupBy("BOROUGH").count
+commits.groupBy("BOROUGH").count.show
+commits.groupBy("BOROUGH").count.printSchema
+
+commits.groupBy("BOROUGH").count.orderBy(desc("BOROUGH")).show
+
+val d = spark.read.csv("user/data/data.csv")
+
+commits.groupBy("LOCATION")
+commits.groupBy("LOCATION").count
+commits.groupBy("LOCATION").count.show
+commits.groupBy("LOCATION").count.printSchema
+
+commits.groupBy("LOCATION").count.orderBy(desc("LOCATION")).show
+
+commits.groupBy("Factor_1")
+commits.groupBy("Factor_1").count
+commits.groupBy("Factor_1").count.show
+commits.groupBy("Factor_1").count.printSchema
+
+commits.groupBy("Factor_1").count.orderBy(desc("Factor_1")).show
+
+commits.groupBy("Factor_2")
+commits.groupBy("Factor_2").count
+commits.groupBy("Factor_2").count.show
+commits.groupBy("Factor_2").count.printSchema
+
+commits.groupBy("Factor_2").count.orderBy(desc("Factor_2")).show
+
+commits.groupBy("Factor_3")
+commits.groupBy("Factor_3").count
+commits.groupBy("Factor_3").count.show
+commits.groupBy("Factor_3").count.printSchema
+
+commits.groupBy("Factor_3").count.orderBy(desc("Factor_3")).show
+
+get_locations = commits.groupBy("BOROUGH").count.orderBy(desc("BOROUGH")).show
+
+//locations for accident factors 1
+if (location in get_locations)
+commits.groupBy("Factor_1").count.show
+
+//locations for accident factors 2
+if (location in get_locations)
+commits.groupBy("Factor_2").count.show
+
+//locations for accident factors 3
+if (location in get_locations)
+commits.groupBy("Factor_3").count.show
+
+//output
+// commits: org.apache.spark.sql.DataFrame = [DATE: string, TIME: string ... 27 more fields]
+
+
+// Check the schema of the database
+d.printSchema
+
+//output
+/*
+ |-- DATE: string (nullable = true)
+ |-- TIME: string (nullable = true)
+ |-- BOROUGH: string (nullable = true)
+ |-- ZIP CODE: string (nullable = true)
+ |-- LATITUDE: string (nullable = true)
+ |-- LONGITUDE: string (nullable = true)
+ |-- LOCATION: string (nullable = true)
+ |-- ON STREET NAME: string (nullable = true)
+ |-- CROSS STREET NAME: string (nullable = true)
+ |-- OFF STREET NAME: string (nullable = true)
+ |-- NUMBER OF PERSONS INJURED: string (nullable = true)
+ |-- NUMBER OF PERSONS KILLED: string (nullable = true)
+ |-- NUMBER OF PEDESTRIANS INJURED: string (nullable = true)
+ |-- NUMBER OF PEDESTRIANS KILLED: string (nullable = true)
+ |-- NUMBER OF CYCLIST INJURED: string (nullable = true)
+ |-- NUMBER OF CYCLIST KILLED: string (nullable = true)
+ |-- NUMBER OF MOTORIST INJURED: string (nullable = true)
+ |-- NUMBER OF MOTORIST KILLED: string (nullable = true)
+ |-- CONTRIBUTING FACTOR VEHICLE 1: string (nullable = true)
+ |-- CONTRIBUTING FACTOR VEHICLE 2: string (nullable = true)
+ |-- CONTRIBUTING FACTOR VEHICLE 3: string (nullable = true)
+ |-- CONTRIBUTING FACTOR VEHICLE 4: string (nullable = true)
+ |-- CONTRIBUTING FACTOR VEHICLE 5: string (nullable = true)
+ |-- UNIQUE KEY: string (nullable = true)
+ |-- VEHICLE TYPE CODE 1: string (nullable = true)
+ |-- VEHICLE TYPE CODE 2: string (nullable = true)
+ |-- VEHICLE TYPE CODE 3: string (nullable = true)
+ |-- VEHICLE TYPE CODE 4: string (nullable = true)
+ |-- VEHICLE TYPE CODE 5: string (nullable = true)
+*/
+
+// To ignore the header of the database that is the column name of the data 
+val commits = spark.read
+              option("header", "true")
+              csv("user/data/data.csv")
+commits.printSchema
+
+//output
+/*
++----------+----+---------+--------+---------+----------+-----------------------+--------------------------------+-----------------------+----------------------------------------+-------------------------+------------------------+-----------------------------+----------------------------+-------------------------+------------------------+--------------------------+-------------------------+------------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+----------+-----------------------------+-----------------------------+-------------------+-------------------+-------------------+
+|DATE      |TIME|BOROUGH  |ZIP CODE|LATITUDE |LONGITUDE |LOCATION               |ON STREET NAME                  |CROSS STREET NAME      |OFF STREET NAME                         |NUMBER OF PERSONS INJURED|NUMBER OF PERSONS KILLED|NUMBER OF PEDESTRIANS INJURED|NUMBER OF PEDESTRIANS KILLED|NUMBER OF CYCLIST INJURED|NUMBER OF CYCLIST KILLED|NUMBER OF MOTORIST INJURED|NUMBER OF MOTORIST KILLED|CONTRIBUTING FACTOR VEHICLE 1 |CONTRIBUTING FACTOR VEHICLE 2|CONTRIBUTING FACTOR VEHICLE 3|CONTRIBUTING FACTOR VEHICLE 4|CONTRIBUTING FACTOR VEHICLE 5|UNIQUE KEY|VEHICLE TYPE CODE 1          |VEHICLE TYPE CODE 2          |VEHICLE TYPE CODE 3|VEHICLE TYPE CODE 4|VEHICLE TYPE CODE 5|
++----------+----+---------+--------+---------+----------+-----------------------+--------------------------------+-----------------------+----------------------------------------+-------------------------+------------------------+-----------------------------+----------------------------+-------------------------+------------------------+--------------------------+-------------------------+------------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+----------+-----------------------------+-----------------------------+-------------------+-------------------+-------------------+
+*/
+
+// list of all logitute and longitute with the count
+ commits.groupBy("LOCATION").count.show
+
+//output
+/*+--------------------+-----+                                                    
+|            LOCATION|count|
++--------------------+-----+
+|(40.866356, -73.8...|    1|
+|(40.89626, -73.86...|    2|
+|(40.581062, -74.1...|    1|
+|(40.659405, -73.9...|   12|
+|(40.72634, -73.76...|   32|
+|(40.834232, -73.874)|    2|
+|(40.703857, -73.9...|    5|
+|(40.750828, -74.0...|   28|
+|(40.756035, -73.9...|   49|
+|(40.752052, -74.0...|   77|
+|(40.74791, -73.96...|   17|
+|(40.706657, -74.0...|   59|
+|(40.759243, -73.9...|    4|
+|(40.724274, -73.9...|   21|
+|(40.69657, -73.95...|    7|
+|(40.590824, -73.9...|    1|
+|(40.67786, -74.01...|   12|
+|(40.826275, -73.8...|  110|
+|(40.611774, -74.0...|   22|
+|(40.844994, -73.8...|    1|
++--------------------+-----+
+*/
+
+// Header with an optional delimiter
+val commits = spark.read.
+              option("header", "true").
+              option("delimiter", "|").
+              csv("user/data/data.csv")
+commits.printSchema
+commits.count
+
+// List of all location where the accident took place
+commits.groupBy("BOROUGH").count.show
+
+//output   (result same as obtained using map reduce program)
+/*
++-------------+------+                                                          
+|      BOROUGH| count|
++-------------+------+
+|         null|355086|
+|            0|     1|
+|        BRONX|118619|
+|     BROOKLYN|272651|
+|    MANHATTAN|222055|
+|       QUEENS|231991|
+|STATEN ISLAND| 40566|
++-------------+------+
+*/
+
+output for different location factors
+/*
+Accelerator Defective	472
+Aggressive Driving/Road Rage	3622
+Alcohol Involvement	9076
+Animals Action	615
+Backing Unsafely	34924
+Brakes Defective	2818
+CONTRIBUTING FACTOR VEHICLE 2	1
+Cell Phone (hand-held)	188
+Cell Phone (hands-free)	194
+Driver Inattention/Distraction	165194
+Driver Inexperience	14458
+Driverless/Runaway Vehicle	355
+Drugs (Illegal)	574
+Failure to Keep Right	1936
+Failure to Yield Right-of-Way	53873
+Fatigued/Drowsy	41254
+Fell Asleep	1913
+Following Too Closely	31351
+Glare	2174
+Headlights Defective	65
+Illness	2410
+Lane Marking Improper/Inadequate	517
+Lost Consciousness	18190
+Obstruction/Debris	2020
+Other Electronic Device	2031
+Other Lighting Defects	84
+Other Vehicular	34725
+Outside Car Distraction	9435
+Oversized Vehicle	6542
+Passenger Distraction	4959
+Passing or Lane Usage Improper	14772
+Pavement Defective	1145
+Pavement Slippery	11085
+Pedestrian/Bicyclist/Other Pedestrian Error/Confusion	2125
+Physical Disability	8357
+Prescription Medication	14017
+Reaction to Other Uninvolved Vehicle	6290
+Shoulders Defective/Improper	44
+Steering Failure	1025
+Tire Failure/Inadequate	964
+Tow Hitch Defective	96
+Traffic Control Device Improper/Non-Working	490
+Traffic Control Disregarded	14834
+Turning Improperly	25912
+Unsafe Lane Changing	12248
+Unsafe Speed	5681
+Unspecified	638849
+View Obstructed/Limited	5289
+Windshield Inadequate	53
+*/

@@ -36,3 +36,15 @@ load data inpath /path_of_the_file_in_hdfs into table data;
 ```
 create table locations (dates string, time string, zip string, lat float, long float, injured int, killed int, f1 string, f2 string, f3 string, f4 string, f5 string)
 ```
+
+## 4. Determine total locations avaliable in the data.csv file
+
+```
+select distinct(location) from data;
+```
+-Note: we can directly write the output to a file 
+```
+insert overwrite directory "/Path_in_HDFS" select distinct(location) from data;
+```
+
+

@@ -47,6 +47,7 @@ select distinct(location) from data;
 insert overwrite directory "/Path_in_HDFS" select distinct(location) from data;
 ```
 ## OUTPUT:
+```
 > 
 > 0
 > BOROUGH
@@ -55,7 +56,7 @@ insert overwrite directory "/Path_in_HDFS" select distinct(location) from data;
 > STATEN ISLAND
 > BRONX
 > QUEENS
-
+```
 Note: There are two invalid location;
 
 

@@ -80,6 +80,7 @@ insert overwrite table locations partition(location="MANHATTAN") select t.dates,
 ## 8. Check the data in the table (OPTIONAL)
 ```
 select * from locations where location="STATEN ISLAND" limit 5;
+```
 
 ## 9. Input the data into location table for STATEN ISLAND = "STATEN ISLAND"
 Inserting data into table for location STATEN ISLAND
@@ -90,6 +91,7 @@ insert overwrite table locations partition(location="STATEN ISLAND") select t.da
 ## 10. Check the data in the table (OPTIONAL)
 ```
 select * from locations where location="STATEN ISLAND" limit 5;
+```
 
 ## 11. Input the data into location table for STATEN ISLAND = "QUEENS"
 Inserting data into table for location QUEENS

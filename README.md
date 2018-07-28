@@ -37,7 +37,7 @@ load data inpath /path_of_the_file_in_hdfs into table data;
 create table locations (dates string, time string, zip string, lat float, long float, injured int, killed int, f1 string, f2 string, f3 string, f4 string, f5 string)
 ```
 
-## 4. Determine total locations avaliable in the data.csv file
+## 4. Determine distinct locations avaliable in the data.csv file
 
 ```
 select distinct(location) from data;
@@ -69,6 +69,56 @@ insert overwrite table locations partition(location="BROOKLYN") select t.dates, 
 ## 6. Check the data in the table (OPTIONAL)
 ```
 select * from locations where location="BROOKLYN" limit 5;
+```
+
+## 7. Input the data into location table for location = "MANHATTAN"
+Inserting data into table for location MANHATTAN
+```
+insert overwrite table locations partition(location="MANHATTAN") select t.dates, t.time, t.zip, t.lat, t.long, t.injured, t.killed, t.factor1, t.factor2, t.factor3, t.factor4, t.factor5 from data t where location="MANHATTAN";
+```
+
+## 8. Check the data in the table (OPTIONAL)
+```
+select * from locations where location="STATEN ISLAND" limit 5;
+
+## 9. Input the data into location table for STATEN ISLAND = "STATEN ISLAND"
+Inserting data into table for location STATEN ISLAND
+```
+insert overwrite table locations partition(location="STATEN ISLAND") select t.dates, t.time, t.zip, t.lat, t.long, t.injured, t.killed, t.factor1, t.factor2, t.factor3, t.factor4, t.factor5 from data t where location="STATEN ISLAND";
+```
+
+## 10. Check the data in the table (OPTIONAL)
+```
+select * from locations where location="STATEN ISLAND" limit 5;
+
+## 11. Input the data into location table for STATEN ISLAND = "QUEENS"
+Inserting data into table for location QUEENS
+```
+insert overwrite table locations partition(location="QUEENS") select t.dates, t.time, t.zip, t.lat, t.long, t.injured, t.killed, t.factor1, t.factor2, t.factor3, t.factor4, t.factor5 from data t where location="QUEENS";
+```
+
+## 12. Check the data in the table (OPTIONAL)
+```
+select * from locations where location="QUEENS" limit 5;
+```
+
+## 12. Check the data in the table (OPTIONAL)
+```
+select * from locations where location="QUEENS" limit 5;
+```
+
+## 13. To verify the partitions go to 
+```
+hadoop fs -ls "/user/hive/warehouse/hive_tutorial.db/locations"
+```
+
+## Your output should be as follows:
+```
+drwxrwxr-x   - user supergroup          0 2018-07-26 23:49 /user/hive/warehouse/hive_tutorial.db/locations/location=BRONX
+drwxrwxr-x   - user supergroup          0 2018-07-27 22:12 /user/hive/warehouse/hive_tutorial.db/locations/location=BROOKLYN
+drwxrwxr-x   - user supergroup          0 2018-07-27 22:20 /user/hive/warehouse/hive_tutorial.db/locations/location=MANHATTAN
+drwxrwxr-x   - user supergroup          0 2018-07-27 22:24 /user/hive/warehouse/hive_tutorial.db/locations/location=QUEENS
+drwxrwxr-x   - user supergroup          0 2018-07-27 22:22 /user/hive/warehouse/hive_tutorial.db/locations/location=STATEN ISLAND
 ```
 
 

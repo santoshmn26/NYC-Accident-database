@@ -131,7 +131,8 @@ drwxrwxr-x   - user supergroup          0 2018-07-27 22:22 /user/hive/warehouse/
 ###### Now that all the data is loaded into the HDFS lets under stand the data
 
 ## 14. Check if the number of accidents are increasing or decreasing
-```select substring(dates, 7, 4) , count(killed) as x from locations
+```
+   select substring(dates, 7, 4) , count(killed) as x from locations
    group by substring(dates, 7,4)
    order by x
 ```

@@ -46,5 +46,29 @@ select distinct(location) from data;
 ```
 insert overwrite directory "/Path_in_HDFS" select distinct(location) from data;
 ```
+## OUTPUT:
+> 
+> 0
+> BOROUGH
+> BROOKLYN
+> MANHATTAN
+> STATEN ISLAND
+> BRONX
+> QUEENS
+
+Note: There are two invalid location;
+
+
+## 5. Input the data into location table
+Inserting data into table for location BROOKLYN
+```
+insert overwrite table locations partition(location="BROOKLYN") select t.dates, t.time, t.zip, t.lat, t.long, t.injured, t.killed, t.factor1, t.factor2, t.factor3, t.factor4, t.factor5 from data t where location="BROOKLYN";
+```
+
+## 6. Check the data in the table (OPTIONAL)
+```
+select * from locations where location="BROOKLYN" limit 5;
+```
+
 
 

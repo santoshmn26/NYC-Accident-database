@@ -57,7 +57,7 @@ insert overwrite directory "/Path_in_HDFS" select distinct(location) from data;
 > BRONX
 > QUEENS
 ```
-Note: There are two invalid location;
+Note: There are Three invalid location null, 0, and Borough;
 
 
 ## 5. Input the data into location table
@@ -79,7 +79,7 @@ insert overwrite table locations partition(location="MANHATTAN") select t.dates,
 
 ## 8. Check the data in the table (OPTIONAL)
 ```
-select * from locations where location="STATEN ISLAND" limit 5;
+select * from locations where location="MANHATTAN" limit 5;
 ```
 
 ## 9. Input the data into location table for STATEN ISLAND = "STATEN ISLAND"
@@ -93,7 +93,7 @@ insert overwrite table locations partition(location="STATEN ISLAND") select t.da
 select * from locations where location="STATEN ISLAND" limit 5;
 ```
 
-## 11. Input the data into location table for STATEN ISLAND = "QUEENS"
+## 11. Input the data into location table for QUEENS = "QUEENS"
 Inserting data into table for location QUEENS
 ```
 insert overwrite table locations partition(location="QUEENS") select t.dates, t.time, t.zip, t.lat, t.long, t.injured, t.killed, t.factor1, t.factor2, t.factor3, t.factor4, t.factor5 from data t where location="QUEENS";
@@ -101,15 +101,20 @@ insert overwrite table locations partition(location="QUEENS") select t.dates, t.
 
 ## 12. Check the data in the table (OPTIONAL)
 ```
-select * from locations where location="QUEENS" limit 5;
+select * from locations where location="BRONX" limit 5;
+```
+## 13. Input the data into location table for BRONX = "BRONX"
+Inserting data into table for location BRONX
+```
+insert overwrite table locations partition(location="BRONX") select t.dates, t.time, t.zip, t.lat, t.long, t.injured, t.killed, t.factor1, t.factor2, t.factor3, t.factor4, t.factor5 from data t where location="BRONX";
 ```
 
-## 12. Check the data in the table (OPTIONAL)
+## 14. Check the data in the table (OPTIONAL)
 ```
-select * from locations where location="QUEENS" limit 5;
+select * from locations where location="BRONX" limit 5;
 ```
 
-## 13. To verify the partitions go to 
+## 15. To verify the partitions go to 
 ```
 hadoop fs -ls "/user/hive/warehouse/hive_tutorial.db/locations"
 ```

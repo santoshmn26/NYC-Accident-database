@@ -127,6 +127,24 @@ drwxrwxr-x   - user supergroup          0 2018-07-27 22:20 /user/hive/warehouse/
 drwxrwxr-x   - user supergroup          0 2018-07-27 22:24 /user/hive/warehouse/hive_tutorial.db/locations/location=QUEENS
 drwxrwxr-x   - user supergroup          0 2018-07-27 22:22 /user/hive/warehouse/hive_tutorial.db/locations/location=STATEN ISLAND
 ```
+## Understand your data
+###### Now that all the data is loaded into the HDFS lets under stand the data
 
+## 14. Check if the number of accidents are increasing or decreasing
+```select substring(dates, 7, 4) , count(killed) as x from locations
+   group by substring(dates, 7,4)
+   order by x
+```
+
+## OUTPUT:
+```
+2018	36205
+2012	77572
+2017	141911
+2016	154444
+2013	155968
+2014	156340
+2015	163442
+```
 
 
